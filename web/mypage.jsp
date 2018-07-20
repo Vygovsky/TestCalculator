@@ -11,6 +11,6 @@
     <title>Test</title>
   </head>
   <body>
-  HO, HO, HO,  ))))   I am doing
+  HO, HO, HO,  ))))   I am doing   ${name}
   </body>
 </html>
