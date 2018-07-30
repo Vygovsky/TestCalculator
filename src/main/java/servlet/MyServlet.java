@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 @WebServlet("/start")
 public class MyServlet extends HttpServlet {
@@ -19,15 +20,36 @@ public class MyServlet extends HttpServlet {
 
         String name = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
+        //  String job = req.getParameter("job");
+        String[] jobs = req.getParameterValues("job");
+        String gender = req.getParameter("gender");
+        if (gender == null)
+            gender = "-";
+        String age = req.getParameter("age18");
+        if (age == null)
+            age = "-";
         System.out.println(name);
         System.out.println(lastName);
+        //System.out.println(job);
+        System.out.println("Колличество ролей" + jobs.length);
+        for (String job : jobs) {
+            System.out.println(job + ",");
+        }
+        System.out.println();
+        System.out.println(gender);
+        System.out.println(age);
 
 
         PrintWriter writer = resp.getWriter();
         //writer.print("<h1>Hello Роман и " + name + " " + lastName + " doGet</h1> <br> Agane");
         writer.print("<h3>Профиль сотрудника</h3>");
         writer.print("Имя: " + name + "<br>");
-        writer.print("Фимилия : " + name + "<br>");
+        writer.print("Фимилия : " + lastName + "<br>");
+       // writer.print("Професия : " + job + "<br>");
+        writer.print("Професия : " + Arrays.deepToString(jobs) + "<br>");
+        writer.print("Пол : " + gender + "<br>");
+        writer.print("Старше 18 : " + age + "<br>");
+
 
         writer.close();
     }
