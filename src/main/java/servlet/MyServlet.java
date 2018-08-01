@@ -31,7 +31,7 @@ public class MyServlet extends HttpServlet {
         System.out.println(name);
         System.out.println(lastName);
         //System.out.println(job);
-        System.out.println("Колличество ролей" + jobs.length);
+        System.out.println("Колличество ролей " + jobs.length);
         for (String job : jobs) {
             System.out.println(job + ",");
         }

@@ -10,27 +10,24 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/parameter")
+@WebServlet("/parametersServlet")
 public class ParametersServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String user = req.getParameter("user");
-        HttpSession session = req.getSession();
-        ServletContext context = getServletContext();
-        if (user != " " && user != null) {
-            session.setAttribute("user", user);
-            context.setAttribute("user", user);
 
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=utf-8");
+        String name = req.getParameter("user");
+        HttpSession session = req.getSession();
+        ServletContext context = req.getServletContext();
+        if (name != " " && name == null) {
+            session.setAttribute("user", name);
+            context.setAttribute("user", name);
         }
-        /*resp.setContentType("text/html; charset=utf-8");
 
         PrintWriter writer = resp.getWriter();
-        writer.println("Request parameter :" + user + "<br>");
-        writer.println("Session parameter :" + session.getAttribute("user") + "<br>");
-        writer.println("Context parameter :" + context.getAttribute("user") + "<br>");
-        //  writer.println("<a href=");
-        writer.close();
-        System.out.println("Session time :" + session.getMaxInactiveInterval());*/
+        writer.println("Request : " + name + "<br>");
 
 
     }
