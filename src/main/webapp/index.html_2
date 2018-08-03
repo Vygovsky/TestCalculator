@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form method="get" action="/parametersServlet">
+<form method="get" action="parametersServlet">
     Введите имя пользователя: <input type="text" name="user">
     <input type="submit" value="Отправить"/>
 </form>
