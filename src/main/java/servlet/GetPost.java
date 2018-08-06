@@ -8,13 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @WebServlet("/user")
 public class GetPost extends HttpServlet {
-    private static final long serialNumb = 1L;
+ //   private static final long serialNumb = 1L;
     private Map<Integer, String> users = new ConcurrentHashMap<>();
     private AtomicInteger atomicInteger;
 
@@ -29,19 +33,20 @@ public class GetPost extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        Integer id = Integer.parseInt(req.getParameter("id"));
+        /*Integer id = Integer.parseInt(req.getParameter("id"));
         String user = users.get(id);
         if (user == null) {
-            user = " ";
+           user = " ";
 
-        }
-
-        resp.setContentType("text/html; charset=utf-8");
-        PrintWriter writer = resp.getWriter();
+        }*/
+        List<String> userList = new ArrayList(users.values());
+        req.setAttribute("users", userList);
+        //resp.setContentType("text/html; charset=utf-8");
+       /* PrintWriter writer = resp.getWriter();
         writer.println("<h3>User :" + user + " </h3><br>");
         //  writer.println("<a href='http://localhost:8080/user.html'>Back</a>");
-        writer.close();
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/allUser.jsp");
+        writer.close();*/
+        RequestDispatcher dispatcher = req.getRequestDispatcher("user.jsp");
         dispatcher.forward(req, resp);
 
 
@@ -67,7 +72,7 @@ public class GetPost extends HttpServlet {
 
         }
         writer.println("<br>");
-        writer.println("<a href='http://localhost:8080/user.html'>На главную</a>");
+        writer.println("<a href='http://localhost:8080/test'>На главную</a>");
         writer.close();
     }
 }
